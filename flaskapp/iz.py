@@ -32,7 +32,7 @@ class NetForm(FlaskForm):
  # валидатор проверяет введение данных после нажатия кнопки submit
  # и указывает пользователю ввести данные если они не введены
  # или неверны
- cho = StringField('1-изменить по вертикали,2-по горизонтали', validators = [DataRequired()])
+ cho = StringField('Поворот изображения', validators = [DataRequired()])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
  upload = FileField('Load image', validators=[
@@ -76,23 +76,14 @@ def draw(filename,cho):
 
 
 ##меняем половинки
- if cho==1: 
-  a = img.crop((0, 0, int(y * 0.5), x))
-  b = img.crop((int(y * 0.5), 0, x, y))
-  img.paste(b, (0, 0))
-  img.paste(a, (int(x * 0.5), 0))
+  cho==DataRequired(): 
+  
+  img_rot = interp.rotate(input=image_copy, angle=cho ,axes=(0,1), reshape = False)
+  img_rot_r = interp.rotate(input=image_copy, angle=cho ,axes=(0,1), reshape = True)
   output_filename = filename
   img.save(output_filename)
- else:
-  img=img.rotate(90)
-  a = img.crop((0, 0, int(y * 0.5), x))
-  b = img.crop((int(y * 0.5), 0, x, y))
-  img.paste(b, (0, 0))
-  img.paste(a, (int(y * 0.5), 0))
-  img=img.rotate(270)
-  output_filename = filename
-  img.save(output_filename)
- return output_filename,gr_path
+  return output_filename,gr_path
+ 
 
 
 
