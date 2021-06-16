@@ -78,8 +78,8 @@ def draw(filename,cho):
 ##меняем половинки
   cho==DataRequired(): 
   
-  img_rot = interp.rotate(input=image_copy, angle=cho ,axes=(0,1), reshape = False)
-  img_rot_r = interp.rotate(input=image_copy, angle=cho ,axes=(0,1), reshape = True)
+  img_rot = interp.rotate(input=image_copy, angle=cho , reshape = False)
+  img_rot_r = interp.rotate(input=image_copy, angle=cho , reshape = True)
   output_filename = filename
   img.save(output_filename)
   return output_filename,gr_path
